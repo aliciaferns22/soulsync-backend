@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import { logger } from "./logger";
 
-const MONGODB_URI =
-  process.env.MONGODB_URI ||
-  "mongodb://aliciaferns_db_user:soulsync123@ac-f3ntqub-shard-00-00.laypnrd.mongodb.net:27017,ac-f3ntqub-shard-00-01.laypnrd.mongodb.net:27017,ac-f3ntqub-shard-00-02.laypnrd.mongodb.net:27017/ai-therapist?ssl=true&replicaSet=atlas-f2j2ae-shard-0&authSource=admin&appName=Cluster0";
+const MONGODB_URI = process.env.MONGODB_URI || "";
+
+if (!MONGODB_URI) {
+  throw new Error("MONGODB_URI environment variable is not set");
+}
 
 export const connectDB = async () => {
   try {
